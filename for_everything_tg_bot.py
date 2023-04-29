@@ -38,13 +38,18 @@ def send_welcome(message):
 
 #___________________________________________________________
 def get_weather(region):
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={region}&appid=6d9e55b280794de32e84f65a3ae2edeb"
+    url = f"http://api.openweathermap.org/data/2.5/" \
+          f"weather?q={region}&appid=6d9e55b280794de3" \
+          f"2e84f65a3ae2edeb"
     response = requests.get(url)
     data = response.json()
     if data["cod"] == 200:
-        weather_description = data["weather"][0]["description"]
+        weather_description = data["weather"][0]
+        ["description"]
         temperature = data["main"]["temp"]
-        return f"Погода в регионе {region}:\n\n{weather_description}\nТемпература: {int((int(temperature) - 273.15))}°C"
+        return f"Погода в регионе {region}:\n\n" \
+               f"{weather_description}\nТемпература:" \
+               f" {int((int(temperature) - 273.15))}°C"
     else:
         return "Не удалось получить данные о погоде."
 
@@ -56,7 +61,8 @@ def send_weather(message):
         weather = get_weather(region)
         bot.reply_to(message, weather)
     except:
-        bot.reply_to(message, "Не удалось получить данные о погоде.")
+        bot.reply_to(message, "Не удалось получить данные"
+                              " о погоде.")
 #___________________________________________________________
 
 
@@ -147,7 +153,7 @@ def handle_message(message):
                      "Извини, я не понимаю команду.")
 
 
-#_______________________________________________________________________
+#___________________________________________________________
 
 
 
